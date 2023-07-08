@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"baoge.work","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="1. 构造函数string 类有多个构造函数，用法示例如下： 1234string s1();  &#x2F;&#x2F; si &#x3D; &quot;&quot;string s2(&quot;Hello&quot;);  &#x2F;&#x2F; s2 &#x3D; &quot;Hello&quot;string s3(4, &amp;#x27;K&amp;#x27;);  &#x2F;&#x2F; s3 &#x3D; &quot;KKKK&quot;string s4(&quot;12345">
+<meta property="og:type" content="article">
+<meta property="og:title" content="String类常用功能">
+<meta property="og:url" content="https://baoge.work/2021/02/21/C-string/index.html">
+<meta property="og:site_name" content="Julian&#39;s Blog">
+<meta property="og:description" content="1. 构造函数string 类有多个构造函数，用法示例如下： 1234string s1();  &#x2F;&#x2F; si &#x3D; &quot;&quot;string s2(&quot;Hello&quot;);  &#x2F;&#x2F; s2 &#x3D; &quot;Hello&quot;string s3(4, &amp;#x27;K&amp;#x27;);  &#x2F;&#x2F; s3 &#x3D; &quot;KKKK&quot;string s4(&quot;12345">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-02-21T05:37:35.000Z">
+<meta property="article:modified_time" content="2021-02-21T05:41:14.304Z">
+<meta property="article:author" content="Julian">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://baoge.work/2021/02/21/C-string/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>String类常用功能 | Julian's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Julian's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Keep Going</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-首页">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-关于">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-分类">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-归档">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://baoge.work/2021/02/21/C-string/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/Julian.jpg">
+      <meta itemprop="name" content="Julian">
+      <meta itemprop="description" content="不论走得快慢，都不能停下来">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Julian's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          String类常用功能
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-02-21 13:37:35 / Modified: 13:41:14" itemprop="dateCreated datePublished" datetime="2021-02-21T13:37:35+08:00">2021-02-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2021/02/21/C-string/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/02/21/C-string/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2021/02/21/C-string/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/02/21/C-string/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>6.3k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>6 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="1-构造函数"><a href="#1-构造函数" class="headerlink" title="1. 构造函数"></a>1. 构造函数</h1><p>string 类有多个构造函数，用法示例如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s1</span><span class="params">()</span></span>;  <span class="comment">// si = &quot;&quot;</span></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s2</span><span class="params">(<span class="string">&quot;Hello&quot;</span>)</span></span>;  <span class="comment">// s2 = &quot;Hello&quot;</span></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s3</span><span class="params">(<span class="number">4</span>, <span class="string">&#x27;K&#x27;</span>)</span></span>;  <span class="comment">// s3 = &quot;KKKK&quot;</span></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s4</span><span class="params">(<span class="string">&quot;12345&quot;</span>, <span class="number">1</span>, <span class="number">3</span>)</span></span>;  <span class="comment">//s4 = &quot;234&quot;，即 &quot;12345&quot; 的从下标 1 开始，长度为 3 的子串</span></span><br></pre></td></tr></table></figure>
+<p> string 类没有接收一个整型参数或一个字符型参数的构造函数。下面的两种写法是错误的：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s1</span><span class="params">(<span class="string">&#x27;K&#x27;</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s2</span><span class="params">(<span class="number">123</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+<h1 id="2-对-string-对象赋值"><a href="#2-对-string-对象赋值" class="headerlink" title="2. 对 string 对象赋值"></a>2. 对 string 对象赋值</h1><p>可以用 char* 类型的变量、常量，以及 char 类型的变量、常量对 string 对象进行赋值。例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s1;</span><br><span class="line">s1 = <span class="string">&quot;Hello&quot;</span>;  <span class="comment">// s1 = &quot;Hello&quot;</span></span><br><span class="line">s2 = <span class="string">&#x27;K&#x27;</span>;  <span class="comment">// s2 = &quot;K”</span></span><br></pre></td></tr></table></figure>
+<p>string 类还有 assign 成员函数，可以用来对 string 对象赋值。assign 成员函数返回对象自身的引用。例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">string s1(&quot;12345&quot;), s2;</span><br><span class="line">s3.assign(s1);  <span class="comment">// s3 = s1</span></span><br><span class="line">s2.assign(s1, <span class="number">1</span>, <span class="number">2</span>);  <span class="comment">// s2 = &quot;23&quot;，即 s1 的子串(1, 2)</span></span><br><span class="line">s2.assign(<span class="number">4</span>, <span class="string">&#x27;K&#x27;</span>);  <span class="comment">// s2 = &quot;KKKK&quot;</span></span><br><span class="line">s2.assign(<span class="string">&quot;abcde&quot;</span>, <span class="number">2</span>, <span class="number">3</span>);  <span class="comment">// s2 = &quot;cde&quot;，即 &quot;abcde&quot; 的子串(2, 3)</span></span><br></pre></td></tr></table></figure>
+<h1 id="3-求字符串的长度"><a href="#3-求字符串的长度" class="headerlink" title="3. 求字符串的长度"></a>3. 求字符串的长度</h1><p>length 成员函数返回字符串的长度。size 成员函数可以实现同样的功能。</p>
+<h1 id="4-string对象中字符串的连接"><a href="#4-string对象中字符串的连接" class="headerlink" title="4. string对象中字符串的连接"></a>4. string对象中字符串的连接</h1><p>除了可以使用<code>+</code>和<code>+=</code>运算符对 string 对象执行字符串的连接操作外，string 类还有 append 成员函数，可以用来向字符串后面添加内容。append 成员函数返回对象自身的引用。例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">string s1(&quot;123&quot;), s2(&quot;abc&quot;);</span><br><span class="line">s1.append(s2);  <span class="comment">// s1 = &quot;123abc&quot;</span></span><br><span class="line">s1.append(s2, <span class="number">1</span>, <span class="number">2</span>);  <span class="comment">// s1 = &quot;123abcbc&quot;</span></span><br><span class="line">s1.append(<span class="number">3</span>, <span class="string">&#x27;K&#x27;</span>);  <span class="comment">// s1 = &quot;123abcbcKKK&quot;</span></span><br><span class="line">s1.append(<span class="string">&quot;ABCDE&quot;</span>, <span class="number">2</span>, <span class="number">3</span>);  <span class="comment">// s1 = &quot;123abcbcKKKCDE&quot;，添加 &quot;ABCDE&quot; 的子串(2, 3)</span></span><br></pre></td></tr></table></figure>
+<h1 id="5-string对象的比较"><a href="#5-string对象的比较" class="headerlink" title="5. string对象的比较"></a>5. string对象的比较</h1><p>除了可以用 &lt;、&lt;=、==、!=、&gt;=、&gt; 运算符比较 string 对象外，string 类还有 compare 成员函数，可用于比较字符串。compare 成员函数有以下返回值：</p>
+<ul>
+<li>小于 0 表示当前的字符串小；</li>
+<li>等于 0 表示两个字符串相等；</li>
+<li>大于 0 表示另一个字符串小。</li>
+</ul>
+<p> 例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">string s1(&quot;hello&quot;), s2(&quot;hello, world&quot;);</span><br><span class="line"><span class="keyword">int</span> n = s1.compare(s2);</span><br><span class="line">n = s1.compare(<span class="number">1</span>, <span class="number">2</span>, s2, <span class="number">0</span>, <span class="number">3</span>);  <span class="comment">//比较s1的子串 (1,2) 和s2的子串 (0,3)</span></span><br><span class="line">n = s1.compare(<span class="number">0</span>, <span class="number">2</span>, s2);  <span class="comment">// 比较s1的子串 (0,2) 和 s2</span></span><br><span class="line">n = s1.compare(<span class="string">&quot;Hello&quot;</span>);</span><br><span class="line">n = s1.compare(<span class="number">1</span>, <span class="number">2</span>, <span class="string">&quot;Hello&quot;</span>);  <span class="comment">//比较 s1 的子串(1,2)和&quot;Hello”</span></span><br><span class="line">n = s1.compare(<span class="number">1</span>, <span class="number">2</span>, <span class="string">&quot;Hello&quot;</span>, <span class="number">1</span>, <span class="number">2</span>);  <span class="comment">//比较 s1 的子串(1,2)和 &quot;Hello&quot; 的子串(1,2)</span></span><br></pre></td></tr></table></figure>
+<h1 id="6-求-string-对象的子串"><a href="#6-求-string-对象的子串" class="headerlink" title="6. 求 string 对象的子串"></a>6. 求 string 对象的子串</h1><p>substr 成员函数可以用于求子串 (n, m)，原型如下：</p>
+<p>string substr(int n = 0, int m = string::npos) const;</p>
+<p>调用时，如果省略 m 或 m 超过了字符串的长度，则求出来的子串就是从下标 n 开始一直到字符串结束的部分。例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> s1 = <span class="string">&quot;this is ok&quot;</span>;</span><br><span class="line"><span class="built_in">string</span> s2 = s1.substr(<span class="number">2</span>, <span class="number">4</span>);  <span class="comment">// s2 = &quot;is i&quot;</span></span><br><span class="line">s2 = s1.substr(<span class="number">2</span>);  <span class="comment">// s2 = &quot;is is ok&quot;</span></span><br></pre></td></tr></table></figure>
+<h1 id="7-交换两个string对象的内容"><a href="#7-交换两个string对象的内容" class="headerlink" title="7. 交换两个string对象的内容"></a>7. 交换两个string对象的内容</h1><p>swap 成员函数可以交换两个 string 对象的内容。例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s1</span><span class="params">(<span class="string">&quot;West”), s2(&quot;</span>East<span class="string">&quot;);</span></span></span></span><br><span class="line"><span class="function"><span class="params"><span class="string">s1.swap(s2);  // s1 = &quot;</span>East<span class="string">&quot;，s2 = &quot;</span>West<span class="string">&quot;</span></span></span></span><br></pre></td></tr></table></figure>
+<h1 id="8-查找子串和字符"><a href="#8-查找子串和字符" class="headerlink" title="8. 查找子串和字符"></a>8. 查找子串和字符</h1><p>string 类有一些查找子串和字符的成员函数，它们的返回值都是子串或字符在 string 对象字符串中的位置（即下标）。如果查不到，则返回 string::npos。string: :npos 是在 string 类中定义的一个静态常量。这些函数如下：</p>
+<ul>
+<li>find：从前往后查找子串或字符出现的位置。</li>
+<li>rfind：从后往前查找子串或字符出现的位置。</li>
+<li>find_first_of：从前往后查找何处出现另一个字符串中包含的字符。例如：</li>
+<li>s1.find_first_of(“abc”); //查找s1中第一次出现”abc”中任一字符的位置</li>
+<li>find_last_of：从后往前查找何处出现另一个字符串中包含的字符。</li>
+<li>find_first_not_of：从前往后查找何处出现另一个字符串中没有包含的字符。</li>
+<li>find_last_not_of：从后往前查找何处出现另一个字符串中没有包含的字符。</li>
+</ul>
+<p> 下面是 string 类的查找成员函数的示例程序。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">s1</span><span class="params">(<span class="string">&quot;Source Code&quot;</span>)</span></span>;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">if</span> ((n = s1.find(<span class="string">&#x27;u&#x27;</span>)) != <span class="built_in">string</span>::npos) <span class="comment">//查找 u 出现的位置</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;1) &quot;</span> &lt;&lt; n &lt;&lt; <span class="string">&quot;,&quot;</span> &lt;&lt; s1.substr(n) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="comment">//输出 l)2,urce Code</span></span><br><span class="line">    <span class="keyword">if</span> ((n = s1.find(<span class="string">&quot;Source&quot;</span>, <span class="number">3</span>)) == <span class="built_in">string</span>::npos)</span><br><span class="line">        <span class="comment">//从下标3开始查找&quot;Source&quot;，找不到</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;2) &quot;</span> &lt;&lt; <span class="string">&quot;Not Found&quot;</span> &lt;&lt; <span class="built_in">endl</span>;  <span class="comment">//输出 2) Not Found</span></span><br><span class="line">    <span class="keyword">if</span> ((n = s1.find(<span class="string">&quot;Co&quot;</span>)) != <span class="built_in">string</span>::npos)</span><br><span class="line">        <span class="comment">//查找子串&quot;Co&quot;。能找到，返回&quot;Co&quot;的位置</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;3) &quot;</span> &lt;&lt; n &lt;&lt; <span class="string">&quot;, &quot;</span> &lt;&lt; s1.substr(n) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="comment">//输出 3) 7, Code</span></span><br><span class="line">    <span class="keyword">if</span> ((n = s1.find_first_of(<span class="string">&quot;ceo&quot;</span>)) != <span class="built_in">string</span>::npos)</span><br><span class="line">        <span class="comment">//查找第一次出现或 &#x27;c&#x27;、&#x27;e&#x27;或&#x27;o&#x27;的位置</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;4) &quot;</span> &lt;&lt; n &lt;&lt; <span class="string">&quot;, &quot;</span> &lt;&lt; s1.substr(n) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="comment">//输出 4) l, ource Code</span></span><br><span class="line">    <span class="keyword">if</span> ((n = s1.find_last_of(<span class="string">&#x27;e&#x27;</span>)) != <span class="built_in">string</span>::npos)</span><br><span class="line">        <span class="comment">//查找最后一个 &#x27;e&#x27; 的位置</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;5) &quot;</span> &lt;&lt; n &lt;&lt; <span class="string">&quot;, &quot;</span> &lt;&lt; s1.substr(n) &lt;&lt; <span class="built_in">endl</span>;  <span class="comment">//输出 5) 10, e</span></span><br><span class="line">    <span class="keyword">if</span> ((n = s1.find_first_not_of(<span class="string">&quot;eou&quot;</span>, <span class="number">1</span>)) != <span class="built_in">string</span>::npos)</span><br><span class="line">        <span class="comment">//从下标1开始查找第一次出现非 &#x27;e&#x27;、&#x27;o&#x27; 或 &#x27;u&#x27; 字符的位置</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;6) &quot;</span> &lt;&lt; n &lt;&lt; <span class="string">&quot;, &quot;</span> &lt;&lt; s1.substr(n) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="comment">//输出 6) 3, rce Code</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="9-替换子串"><a href="#9-替换子串" class="headerlink" title="9. 替换子串"></a>9. 替换子串</h1><p>replace 成员函数可以对 string 对象中的子串进行替换，返回值为对象自身的引用。例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s1</span><span class="params">(<span class="string">&quot;Real Steel&quot;</span>)</span></span>;</span><br><span class="line">s1.replace(<span class="number">1</span>, <span class="number">3</span>, <span class="string">&quot;123456&quot;</span>, <span class="number">2</span>, <span class="number">4</span>);  <span class="comment">//用 &quot;123456&quot; 的子串(2,4) 替换 s1 的子串(1,3)</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; s1 &lt;&lt; <span class="built_in">endl</span>;  <span class="comment">//输出 R3456 Steel</span></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s2</span><span class="params">(<span class="string">&quot;Harry Potter&quot;</span>)</span></span>;</span><br><span class="line">s2.replace(<span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="string">&#x27;0&#x27;</span>);  <span class="comment">//用 5 个 &#x27;0&#x27; 替换子串(2,3)</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; s2 &lt;&lt; <span class="built_in">endl</span>;  <span class="comment">//输出 HaOOOOO Potter</span></span><br><span class="line"><span class="keyword">int</span> n = s2.find(<span class="string">&quot;OOOOO&quot;</span>);  <span class="comment">//查找子串 &quot;00000&quot; 的位置，n=2</span></span><br><span class="line">s2.replace(n, <span class="number">5</span>, <span class="string">&quot;XXX&quot;</span>);  <span class="comment">//将子串(n,5)替换为&quot;XXX&quot;</span></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; s2 &lt; &lt; <span class="built_in">endl</span>;  <span class="comment">//输出 HaXXX Potter</span></span><br></pre></td></tr></table></figure>
+<h1 id="10-删除子串"><a href="#10-删除子串" class="headerlink" title="10. 删除子串"></a>10. 删除子串</h1><p>erase 成员函数可以删除 string 对象中的子串，返回值为对象自身的引用。例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">s1</span><span class="params">(<span class="string">&quot;Real Steel&quot;</span>)</span></span>;</span><br><span class="line">s1.erase(<span class="number">1</span>, <span class="number">3</span>);  <span class="comment">//删除子串(1, 3)，此后 s1 = &quot;R Steel&quot;</span></span><br><span class="line">s1.erase(<span class="number">5</span>);  <span class="comment">//删除下标5及其后面的所有字符，此后 s1 = &quot;R Ste&quot;</span></span><br></pre></td></tr></table></figure>
+<h1 id="11-插入字符串"><a href="#11-插入字符串" class="headerlink" title="11. 插入字符串"></a>11. 插入字符串</h1><p>insert 成员函数可以在 string 对象中插入另一个字符串，返回值为对象自身的引用。例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">string s1(&quot;Limitless&quot;), s2(&quot;00&quot;);</span><br><span class="line">s1.insert(<span class="number">2</span>, <span class="string">&quot;123&quot;</span>);  <span class="comment">//在下标 2 处插入字符串&quot;123&quot;，s1 = &quot;Li123mitless&quot;</span></span><br><span class="line">s1.insert(<span class="number">3</span>, s2);  <span class="comment">//在下标 2 处插入 s2 , s1 = &quot;Li10023mitless&quot;</span></span><br><span class="line">s1.insert(<span class="number">3</span>, <span class="number">5</span>, <span class="string">&#x27;X&#x27;</span>);  <span class="comment">//在下标 3 处插入 5 个 &#x27;X&#x27;，s1 = &quot;Li1XXXXX0023mitless&quot;</span></span><br></pre></td></tr></table></figure>
+<h1 id="12-将-string-对象作为流处理"><a href="#12-将-string-对象作为流处理" class="headerlink" title="12. 将 string 对象作为流处理"></a>12. 将 string 对象作为流处理</h1><p>使用流对象 istringstream 和 ostringstream，可以将 string 对象当作一个流进行输入输出。使用这两个类需要包含头文件 sstream。</p>
+<p> 示例程序如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">src</span><span class="params">(<span class="string">&quot;Avatar 123 5.2 Titanic K&quot;</span>)</span></span>;</span><br><span class="line">    <span class="function"><span class="built_in">istringstream</span> <span class="title">istrStream</span><span class="params">(src)</span></span>; <span class="comment">//建立src到istrStream的联系</span></span><br><span class="line">    <span class="built_in">string</span> s1, s2;</span><br><span class="line">    <span class="keyword">int</span> n;  <span class="keyword">double</span> d;  <span class="keyword">char</span> c;</span><br><span class="line">    istrStream &gt;&gt; s1 &gt;&gt; n &gt;&gt; d &gt;&gt; s2 &gt;&gt; c; <span class="comment">//把src的内容当做输入流进行读取</span></span><br><span class="line">    <span class="built_in">ostringstream</span> ostrStream;</span><br><span class="line">    ostrStream &lt;&lt; s1 &lt;&lt; <span class="built_in">endl</span> &lt;&lt; s2 &lt;&lt; <span class="built_in">endl</span> &lt;&lt; n &lt;&lt; <span class="built_in">endl</span> &lt;&lt; d &lt;&lt; <span class="built_in">endl</span> &lt;&lt; c &lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; ostrStream.str();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 程序的输出结果是：<br> Avatar<br> Titanic<br> 123<br> 5.2<br> K</p>
+<p> 第 11 行，从输入流 istrStream 进行读取，过程和从 cin 读取一样，只不过输入的来源由键盘变成了 string 对象  src。因此，”Avatar” 被读取到 s1，123 被读取到 n，5.2 被读取到 d，”Titanic” 被读取到s2，’K’ 被读取到  c。</p>
+<p> 第 12 行，将变量的值输出到流 ostrStream。输出结果不会出现在屏幕上，而是被保存在 ostrStream 对象管理的某处。用 ostringstream 类的 str 成员函数能将输出到 ostringstream 对象中的内容提取出来。</p>
+<h1 id="13-用-STL-算法操作-string-对象"><a href="#13-用-STL-算法操作-string-对象" class="headerlink" title="13. 用 STL 算法操作 string 对象"></a>13. 用 STL 算法操作 string 对象</h1><p>string 对象也可以看作一个顺序容器，它支持随机访问迭代器，也有 begin 和 end 等成员函数。STL 中的许多算法也适用于 string 对象。下面是用 STL 算法操作 string 对象的程序示例。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">s</span><span class="params">(<span class="string">&quot;afgcbed&quot;</span>)</span></span>;</span><br><span class="line">    <span class="built_in">string</span>::iterator p = find(s.begin(), s.end(), <span class="string">&#x27;c&#x27;</span>);</span><br><span class="line">    <span class="keyword">if</span> (p!= s.end())</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; p - s.begin() &lt;&lt; <span class="built_in">endl</span>;  <span class="comment">//输出 3</span></span><br><span class="line">    sort(s.begin(), s.end());</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; s &lt;&lt; <span class="built_in">endl</span>;  <span class="comment">//输出 abcdefg</span></span><br><span class="line">    next_permutation(s.begin(), s.end());</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; s &lt;&lt; <span class="built_in">endl</span>; <span class="comment">//输出 abcdegf</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatPay.jpg" alt="Julian WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/ALiPay.jpg" alt="Julian Alipay">
+        <p>Alipay</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Julian
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://baoge.work/2021/02/21/C-string/" title="String类常用功能">https://baoge.work/2021/02/21/C-string/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/02/07/DBnotes/" rel="prev" title="数据库笔记">
+      <i class="fa fa-chevron-left"></i> 数据库笔记
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/03/14/test-encrypt/" rel="next" title="下面的密码是999">
+      下面的密码是999 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-disqus">disqus</a></li>
+            <li class="tab"><a href="#comment-valine">valine</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane disqus" id="comment-disqus">
+              
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+            </div>
+            <div class="tab-pane valine" id="comment-valine">
+              <div class="comments" id="valine-comments"></div>
+            </div>
+        </div>
+      </div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">1. 构造函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E5%AF%B9-string-%E5%AF%B9%E8%B1%A1%E8%B5%8B%E5%80%BC"><span class="nav-number">2.</span> <span class="nav-text">2. 对 string 对象赋值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E6%B1%82%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E9%95%BF%E5%BA%A6"><span class="nav-number">3.</span> <span class="nav-text">3. 求字符串的长度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-string%E5%AF%B9%E8%B1%A1%E4%B8%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E8%BF%9E%E6%8E%A5"><span class="nav-number">4.</span> <span class="nav-text">4. string对象中字符串的连接</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-string%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%AF%94%E8%BE%83"><span class="nav-number">5.</span> <span class="nav-text">5. string对象的比较</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-%E6%B1%82-string-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AD%90%E4%B8%B2"><span class="nav-number">6.</span> <span class="nav-text">6. 求 string 对象的子串</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-%E4%BA%A4%E6%8D%A2%E4%B8%A4%E4%B8%AAstring%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%86%85%E5%AE%B9"><span class="nav-number">7.</span> <span class="nav-text">7. 交换两个string对象的内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-%E6%9F%A5%E6%89%BE%E5%AD%90%E4%B8%B2%E5%92%8C%E5%AD%97%E7%AC%A6"><span class="nav-number">8.</span> <span class="nav-text">8. 查找子串和字符</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-%E6%9B%BF%E6%8D%A2%E5%AD%90%E4%B8%B2"><span class="nav-number">9.</span> <span class="nav-text">9. 替换子串</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-%E5%88%A0%E9%99%A4%E5%AD%90%E4%B8%B2"><span class="nav-number">10.</span> <span class="nav-text">10. 删除子串</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#11-%E6%8F%92%E5%85%A5%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">11.</span> <span class="nav-text">11. 插入字符串</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#12-%E5%B0%86-string-%E5%AF%B9%E8%B1%A1%E4%BD%9C%E4%B8%BA%E6%B5%81%E5%A4%84%E7%90%86"><span class="nav-number">12.</span> <span class="nav-text">12. 将 string 对象作为流处理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#13-%E7%94%A8-STL-%E7%AE%97%E6%B3%95%E6%93%8D%E4%BD%9C-string-%E5%AF%B9%E8%B1%A1"><span class="nav-number">13.</span> <span class="nav-text">13. 用 STL 算法操作 string 对象</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Julian"
+      src="/images/Julian.jpg">
+  <p class="site-author-name" itemprop="name">Julian</p>
+  <div class="site-description" itemprop="description">不论走得快慢，都不能停下来</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/king0421" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;king0421" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1295728062@qq.com" title="E-Mail → mailto:1295728062@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2021.2.7 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Julian</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">20k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">18 mins.</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://Julian.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://baoge.work/2021/02/21/C-string/";
+    this.page.identifier = "2021/02/21/C-string/";
+    this.page.title = "String类常用功能";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://Julian.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'lgUcOKOHS63JrPAhO5Le7SG5-gzGzoHsz',
+      appKey     : 'BQLBMX2tnY5WEUJf9p0wfAIW',
+      placeholder: "快来撩我吧！",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
