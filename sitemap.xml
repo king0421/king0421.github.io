@@ -38,15 +38,6 @@
   </url>
   
   <url>
-    <loc>https://baoge.work/2022/06/07/njust-target/</loc>
-    
-    <lastmod>2022-06-07</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://baoge.work/2021/02/07/DBnotes/</loc>
     
     <lastmod>2022-03-31</lastmod>
@@ -122,13 +113,6 @@
   
   <url>
     <loc>https://baoge.work/categories/C/</loc>
-    <lastmod>2024-04-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://baoge.work/categories/%E6%97%A5%E5%B8%B8/</loc>
     <lastmod>2024-04-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
