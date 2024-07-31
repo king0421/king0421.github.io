@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"baoge.work","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="特殊技巧位运算Java中支持的位运算位与（&amp;）：二元运算符，两个为1时结果为1，否则为0位或（|）：二元运算符，两个其中有一个为1时结果就为1，否则为0位异或（^）：二元运算符，两个数相同时结果为0，否则为1。任何数和0做异或结果仍然是原来的数，任何数和自身做异或结果还是0，异或运算满足交换律和结合律。异或-1 (二进制全为1) 相当于取反位取非（~）：一元运算符，取反操作，即1变为0，0">
+<meta property="og:type" content="article">
+<meta property="og:title" content="力扣top100-特殊技巧">
+<meta property="og:url" content="https://baoge.work/2024/07/31/%E5%8A%9B%E6%89%A3top100-%E7%89%B9%E6%AE%8A%E6%8A%80%E5%B7%A7/index.html">
+<meta property="og:site_name" content="Julian&#39;s Blog">
+<meta property="og:description" content="特殊技巧位运算Java中支持的位运算位与（&amp;）：二元运算符，两个为1时结果为1，否则为0位或（|）：二元运算符，两个其中有一个为1时结果就为1，否则为0位异或（^）：二元运算符，两个数相同时结果为0，否则为1。任何数和0做异或结果仍然是原来的数，任何数和自身做异或结果还是0，异或运算满足交换律和结合律。异或-1 (二进制全为1) 相当于取反位取非（~）：一元运算符，取反操作，即1变为0，0">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-07-31T01:39:36.447Z">
+<meta property="article:modified_time" content="2024-07-31T02:01:05.934Z">
+<meta property="article:author" content="Julian">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://baoge.work/2024/07/31/%E5%8A%9B%E6%89%A3top100-%E7%89%B9%E6%AE%8A%E6%8A%80%E5%B7%A7/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>力扣top100-特殊技巧 | Julian's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Julian's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Keep Going</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-首页">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-关于">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-分类">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-归档">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://baoge.work/2024/07/31/%E5%8A%9B%E6%89%A3top100-%E7%89%B9%E6%AE%8A%E6%8A%80%E5%B7%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/Julian.jpg">
+      <meta itemprop="name" content="Julian">
+      <meta itemprop="description" content="不论走得快慢，都不能停下来">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Julian's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          力扣top100-特殊技巧
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2024-07-31 09:39:36 / Modified: 10:01:05" itemprop="dateCreated datePublished" datetime="2024-07-31T09:39:36+08:00">2024-07-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode%E5%88%B7%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">leetcode刷题</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2024/07/31/%E5%8A%9B%E6%89%A3top100-%E7%89%B9%E6%AE%8A%E6%8A%80%E5%B7%A7/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2024/07/31/力扣top100-特殊技巧/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2024/07/31/%E5%8A%9B%E6%89%A3top100-%E7%89%B9%E6%AE%8A%E6%8A%80%E5%B7%A7/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/07/31/%E5%8A%9B%E6%89%A3top100-%E7%89%B9%E6%AE%8A%E6%8A%80%E5%B7%A7/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>5.8k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>5 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="特殊技巧"><a href="#特殊技巧" class="headerlink" title="特殊技巧"></a>特殊技巧</h1><h1 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h1><p>Java中支持的位运算<br>位与（&amp;）：二元运算符，两个为1时结果为1，否则为0<br>位或（|）：二元运算符，两个其中有一个为1时结果就为1，否则为0<br>位异或（^）：二元运算符，两个数相同时结果为0，否则为1。任何数和0做异或结果仍然是原来的数，任何数和自身做异或结果还是0，异或运算满足交换律和结合律。<strong>异或-1 (二进制全为1) 相当于取反</strong><br>位取非（~）：一元运算符，取反操作，即1变为0，0变为1<br>左移（&lt;&lt;）：一元运算符，按位左移一定的位置。高位溢出，低位补0，符号位不变。<br>右移（&gt;&gt;）：一元运算符，按位右移一定的位置。高位补符号位，符号位不变，低位溢出。<br>无符号右移（&gt;&gt;&gt;）：一元运算符，高位补零，低位溢出。</p>
+<h1 id="位移操作"><a href="#位移操作" class="headerlink" title="位移操作"></a>位移操作</h1><p>Java中的位移操作只针对int类型的有效，Java中，一个int的长度始终是32位，也就是4个字节，它操作的都是该整数的二进制数。也可作用于以下类型，即 byte，short，char，long(它们都是整数形式)。当为这四种类型时，JVM先把它们转换成int类型再进行操作。</p>
+<h2 id="左移（-lt-lt-）"><a href="#左移（-lt-lt-）" class="headerlink" title="左移（&lt;&lt;）"></a>左移（&lt;&lt;）</h2><p>高位溢出，低位补0，符号位不变。移动位数超过该类型的最大位数，则进行取模，如对Integer型左移34位，实际上只移动了两位。左移一位相当于乘以2的一次方，左移n位相当于乘以2的n次方。</p>
+<h2 id="右移（-gt-gt-）"><a href="#右移（-gt-gt-）" class="headerlink" title="右移（&gt;&gt;）"></a>右移（&gt;&gt;）</h2><p>高位补符号位，符号位不变，低位溢出。右移一位相当于除以2的一次方，右移n位相当于除以2的n次方。除不尽向下取整。</p>
+<h2 id="无符号右移（-gt-gt-gt-）"><a href="#无符号右移（-gt-gt-gt-）" class="headerlink" title="无符号右移（&gt;&gt;&gt;）"></a>无符号右移（&gt;&gt;&gt;）</h2><p><strong>高位补零，低位溢出</strong>。即若该数为正，则高位补0，而若该数为负数，则右移后高位同样补0</p>
+<p>Java 不直接支持无符号左移操作，因为在 Java 中所有的整数类型（如 <code>byte</code>, <code>short</code>, <code>int</code>, 和 <code>long</code>）都是有符号的。这意味着所有的左移操作 (<code>&lt;&lt;</code>) 都是有符号的，即它会保留整数的符号位。</p>
+<p>然而，在 Java 中，由于整数是有符号的，并且使用补码表示法，所以实际上不需要无符号左移操作。当你进行左移操作时，高位溢出的部分会被丢弃，低位则用0填充，这在效果上与无符号左移是一样的。</p>
+<p>例如，对于一个 <code>int</code> 类型的值，其范围是 -2,147,483,648 到 2,147,483,647（32位），如果你对一个正数进行左移，那么高位溢出的位会被丢弃，低位用0填充，而负数的情况也是一样，只是高位的符号位会被保持。</p>
+<h1 id="位运算的使用"><a href="#位运算的使用" class="headerlink" title="位运算的使用"></a>位运算的使用</h1><h2 id="判断奇偶数"><a href="#判断奇偶数" class="headerlink" title="判断奇偶数"></a>判断奇偶数</h2><p>我们通过二进制判断奇偶数的话，看的是二进制最后一位，如果最后一位为0的话是偶数，为1的话是奇数。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> num = <span class="number">5</span>;	</span><br><span class="line">System.out.println(num + <span class="string">&quot;是&quot;</span> + ((num&amp;<span class="number">1</span>) == <span class="number">0</span> ? <span class="string">&quot;偶数&quot;</span>:<span class="string">&quot;奇数&quot;</span>));</span><br><span class="line"><span class="comment">// 0101</span></span><br><span class="line"><span class="comment">// 0001</span></span><br><span class="line"><span class="comment">// 0001 = 1  所以是奇数</span></span><br></pre></td></tr></table></figure>
+<h2 id="获取二进制位是1还是0"><a href="#获取二进制位是1还是0" class="headerlink" title="获取二进制位是1还是0"></a>获取二进制位是1还是0</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> n = <span class="number">86</span>;</span><br><span class="line">System.out.println(n + <span class="string">&quot;的第五位是&quot;</span> + (((n&amp;(<span class="number">1</span>&lt;&lt;<span class="number">4</span>))&gt;&gt;<span class="number">4</span>) == <span class="number">0</span> ? <span class="string">&quot;0&quot;</span>:<span class="string">&quot;1&quot;</span>));</span><br><span class="line">System.out.println(n + <span class="string">&quot;的第五位是&quot;</span> + (((n&gt;&gt;<span class="number">4</span>)&amp;<span class="number">1</span>) == <span class="number">0</span> ? <span class="string">&quot;0&quot;</span>:<span class="string">&quot;1&quot;</span>));</span><br><span class="line"><span class="comment">// 右移四位后则最低为就是第五位</span></span><br></pre></td></tr></table></figure>
+<h2 id="交换两个整数变量的值"><a href="#交换两个整数变量的值" class="headerlink" title="交换两个整数变量的值"></a>交换两个整数变量的值</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> num1 = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> num2 = <span class="number">20</span>;</span><br><span class="line">num1 = num1^num2;</span><br><span class="line">num2 = num1^num2;</span><br><span class="line">num1 = num1^num2;</span><br><span class="line">System.out.println(<span class="string">&quot;num1=&quot;</span> + num1 + <span class="string">&quot;, num2=&quot;</span> + num2);</span><br><span class="line"><span class="comment">//num2可以看成是num1^(num2^num2)，故结果为num1</span></span><br><span class="line"><span class="comment">//num1可以看成是(num1^num1)^(num2^num2)^num2，故结果为num2</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="不用判断语句，求整数的绝对值"><a href="#不用判断语句，求整数的绝对值" class="headerlink" title="不用判断语句，求整数的绝对值"></a>不用判断语句，求整数的绝对值</h2><p>负数的绝对值为，补码取反+1，即 ~a+1。而一个32 bit的int类型的正数 &gt;&gt; 31，结果为0，负数 &gt;&gt; 31 为-1。</p>
+<p>即 (a &gt;&gt; 31) 的结果为 0 或者 -1。如果 a 为负数，(a &gt;&gt; 31) ^ a 相当于 ~a，则需要 + 1 才能得到 a 的绝对值</p>
+<p>且一个32 bit的int类型的正数 &gt;&gt;&gt; 31，结果为0，负数 &gt;&gt;&gt; 31为1。</p>
+<p>所以代码为:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = -<span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> b = ((a &gt;&gt; <span class="number">31</span>) ^ a) + (a &gt;&gt;&gt; <span class="number">31</span>);</span><br><span class="line">System.out.println(<span class="string">&quot;a=&quot;</span> + a + <span class="string">&quot;, b=&quot;</span> + b);</span><br></pre></td></tr></table></figure>
+<p>也可以写成</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = -<span class="number">86</span>;</span><br><span class="line"><span class="keyword">int</span> b = a &gt;&gt; <span class="number">31</span>;</span><br><span class="line"><span class="comment">// 当a为正时：b = 0，a ^ b = a;</span></span><br><span class="line"><span class="comment">// 当a为负时：b = -1，a ^ b = ~a;</span></span><br><span class="line"><span class="keyword">return</span> (a ^ b) - b; <span class="comment">// 也可以写为：(a ^ (a &gt;&gt; 31)) - (a &gt;&gt; 31)</span></span><br></pre></td></tr></table></figure>
+<h2 id="常见面试题"><a href="#常见面试题" class="headerlink" title="常见面试题"></a>常见面试题</h2><p>2*8怎么运算性能最好</p>
+<p>实际采用位运算的方式是性能最好的，因为计算机对于计算数据的话，都是以二进制来进行运算的，所以使用位运算相比直接使用(+、-、 *、/)运算符，要更高效，能显著调高代码在计算机中的执行效率。相当于2 &lt;&lt; 3。</p>
+<h1 id="136-只出现一次的数字"><a href="#136-只出现一次的数字" class="headerlink" title="136. 只出现一次的数字"></a>136. 只出现一次的数字</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/single-number/">136. 只出现一次的数字</a></p>
+<p>给你一个 <strong>非空</strong> 整数数组 <code>nums</code> ，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。你必须设计并实现线性时间复杂度的算法来解决此问题，且该算法只使用常量额外空间</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">singleNumber</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//使用异或运算  a^a = 0   a^0=a</span></span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num : nums) &#123;</span><br><span class="line">            ans ^= num;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>扩展：只出现两次的数字。一个数组里面只有一个数字出现两次 其他都是一次</p>
+<h1 id="169-多数元素"><a href="#169-多数元素" class="headerlink" title="169. 多数元素"></a>169. 多数元素</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/majority-element/">169. 多数元素</a></p>
+<p>给定一个大小为 <code>n</code> 的数组 <code>nums</code> ，返回其中的多数元素。多数元素是指在数组中出现次数 <strong>大于</strong> <code>⌊ n/2 ⌋</code> 的元素。</p>
+<p>你可以假设数组是非空的，并且给定的数组总是存在多数元素。</p>
+<p>本题常见的三种解法：</p>
+<ul>
+<li><p>哈希表统计法： 遍历数组 nums ，用 HashMap 统计各数字的数量，即可找出 众数 。此方法时间和空间复杂度均为 O(N)。 </p>
+</li>
+<li><p>数组排序法： 将数组 nums 排序，数组中点的元素 一定为众数。</p>
+</li>
+<li><p>摩尔投票法： 核心理念为票数正负抵消，此方法时间和空间复杂度分别为 O(N) 和 O(1) ，为本题的最佳解法。</p>
+</li>
+</ul>
+<p>摩尔投票法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int majorityElement(int[] nums) &#123;</span><br><span class="line">        &#x2F;&#x2F;nums的众数为x 票数和为votes </span><br><span class="line">        &#x2F;&#x2F; 众数的票数+1 非众数-1 那么总票数一定大于0</span><br><span class="line">        &#x2F;&#x2F;如果数组的前m个数字的票数和为0 那剩余的n-m个数字的票数和仍然大于0，且众数仍然是x</span><br><span class="line">        &#x2F;&#x2F;当总票数votes为0时，当前的数字设置为众数x</span><br><span class="line">        &#x2F;&#x2F;核心思想就是抵消原则 众数和非众数的抵消 非众数之间的抵消</span><br><span class="line">        int x &#x3D; 0, votes &#x3D; 0;</span><br><span class="line">        for (int num : nums) &#123;</span><br><span class="line">            if (votes &#x3D;&#x3D; 0) x &#x3D; num;</span><br><span class="line">            if (num &#x3D;&#x3D; x) &#123;</span><br><span class="line">                votes +&#x3D; 1;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                votes +&#x3D; -1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="75-颜色分类"><a href="#75-颜色分类" class="headerlink" title="75. 颜色分类"></a>75. 颜色分类</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sort-colors/">75. 颜色分类</a></p>
+<p>给定一个包含红色、白色和蓝色、共 <code>n</code> 个元素的数组 <code>nums</code> ，**<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95">原地</a>**对它们进行排序，使得相同颜色的元素相邻，并按照红色、白色、蓝色顺序排列。我们使用整数 <code>0</code>、 <code>1</code> 和 <code>2</code> 分别表示红色、白色和蓝色。必须在不使用库内置的 sort 函数的情况下解决这个问题。</p>
+<p>解答：排序分成三个部分。类似于快速排序。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sortColors</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> l = <span class="number">0</span>, r = nums.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//l是记录最左边的1的位置 也就是下一个插入0的地方</span></span><br><span class="line">        <span class="comment">//r是下一个插入2的位置</span></span><br><span class="line">        <span class="keyword">while</span> (i &lt;= r) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[i] == <span class="number">0</span>) &#123;</span><br><span class="line">                swap(nums, i ,l);</span><br><span class="line">                i++;</span><br><span class="line">                l++;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[i] == <span class="number">1</span>) &#123;</span><br><span class="line">                i++;  <span class="comment">//这里l的位置不变</span></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">//这里不用i++ 因为换过来的num[r]也可能等于2   所以r-1，继续交换  直到num[r]不等于2</span></span><br><span class="line">                swap(nums, i, r);</span><br><span class="line">                r--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> temp = nums[a];</span><br><span class="line">        nums[a] = nums[b];</span><br><span class="line">        nums[b] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="31-下一个排列"><a href="#31-下一个排列" class="headerlink" title="31. 下一个排列"></a>31. 下一个排列</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/next-permutation/">31. 下一个排列</a></p>
+<p>整数数组的一个 <strong>排列</strong> 就是将其所有成员以序列或线性顺序排列。</p>
+<ul>
+<li>例如，<code>arr = [1,2,3]</code> ，以下这些都可以视作 <code>arr</code> 的排列：<code>[1,2,3]</code>、<code>[1,3,2]</code>、<code>[3,1,2]</code>、<code>[2,3,1]</code> 。</li>
+</ul>
+<p>整数数组的 <strong>下一个排列</strong> 是指其整数的下一个字典序更大的排列。更正式地，如果数组的所有排列根据其字典顺序从小到大排列在一个容器中，那么数组的 <strong>下一个排列</strong> 就是在这个有序容器中排在它后面的那个排列。如果不存在下一个更大的排列，那么这个数组必须重排为字典序最小的排列（即，其元素按升序排列）。</p>
+<ul>
+<li>例如，<code>arr = [1,2,3]</code> 的下一个排列是 <code>[1,3,2]</code> 。</li>
+<li>类似地，<code>arr = [2,3,1]</code> 的下一个排列是 <code>[3,1,2]</code> 。</li>
+<li>而 <code>arr = [3,2,1]</code> 的下一个排列是 <code>[1,2,3]</code> ，因为 <code>[3,2,1]</code> 不存在一个字典序更大的排列。</li>
+</ul>
+<p>给你一个整数数组 <code>nums</code> ，找出 <code>nums</code> 的下一个排列。必须**<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95"> 原地 </a>**修改，只允许使用额外常数空间。</p>
+<p>解法：我们会尽可能的将低位的数字变大，这样才符合下一个排列的定义。</p>
+<p>也就是从低位往高位检查，观察某一位在下一个排列中是否可以被更大的数代替。</p>
+<p>假设第k个位置就是需要替换的位置。其实就是将 k 位到低位的所有数作为候选，判断是否有更大的数可以填入 k 位中。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">nextPermutation</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//为了更好理解，我们结合样例来分析，假设样例为 [1,3,5,4,1]：</span></span><br><span class="line">        <span class="keyword">int</span> n = nums.length, k = n - <span class="number">1</span>;<span class="comment">//k就是那个需要被替换的数</span></span><br><span class="line">        <span class="comment">//从后往前找，找到第一个下降的位置，记为 k。注意k 以后的位置是降序的。 在样例中就是找到 3</span></span><br><span class="line">        <span class="keyword">while</span> (k - <span class="number">1</span> &gt;= <span class="number">0</span> &amp;&amp; nums[k - <span class="number">1</span>] &gt;= nums[k]) &#123;</span><br><span class="line">            k--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (k == <span class="number">0</span>) &#123;   <span class="comment">//已经是最大的排序的 目前就是降序 直接翻转即可，会比sort快</span></span><br><span class="line">            reverse(nums, <span class="number">0</span>, n - <span class="number">1</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//从k往后找，找到最小的比 k 要大的数。 找到 4</span></span><br><span class="line">            <span class="keyword">int</span> a = k;</span><br><span class="line">            <span class="keyword">while</span> (a + <span class="number">1</span> &lt; n &amp;&amp; nums[a + <span class="number">1</span>] &gt; nums[k - <span class="number">1</span>]) &#123; <span class="comment">//这里的k-1就是3的位置</span></span><br><span class="line">                a++;    <span class="comment">//因为k之后的是降序的  所以就一直修改a的值 直到最后一个就是最小的</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//将两者交换。注意此时 k 以后的位置仍然是降序的。</span></span><br><span class="line">            swap(nums, k - <span class="number">1</span>, a);</span><br><span class="line">            <span class="comment">//直接将 k 以后的部分翻转（变为升序）</span></span><br><span class="line">            reverse(nums, k, n - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">reverse</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> l = a, r = b;</span><br><span class="line">        <span class="keyword">while</span> (l &lt; r) &#123;</span><br><span class="line">            swap(nums, l++, r--);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> tmp = nums[a];</span><br><span class="line">        nums[a] = nums[b];</span><br><span class="line">        nums[b] = tmp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="287-寻找重复数"><a href="#287-寻找重复数" class="headerlink" title="287. 寻找重复数"></a>287. 寻找重复数</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-the-duplicate-number/">287. 寻找重复数</a></p>
+<p>给定一个包含 <code>n + 1</code> 个整数的数组 <code>nums</code> ，其数字都在 <code>[1, n]</code> 范围内（包括 <code>1</code> 和 <code>n</code>），可知至少存在一个重复的整数。</p>
+<p>假设 <code>nums</code> 只有 <strong>一个重复的整数</strong> ，返回 <strong>这个重复的数</strong> 。</p>
+<p>你设计的解决方案必须 <strong>不修改</strong> 数组 <code>nums</code> 且只用常量级 <code>O(1)</code> 的额外空间。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findDuplicate</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//如果数组中有重复的数字, 那么就会产生多对一的映射，形成的链表就一定有环</span></span><br><span class="line">        <span class="comment">//找到数组中的重复整数 &lt;==&gt; 找到链表的环入口 那么这道题就相当于环形链表2</span></span><br><span class="line">        <span class="comment">//以数组 [1,3,4,2,2] 为例,我们将数组下标 n 和数 nums[n] 建立一个映射关系 f(n)，</span></span><br><span class="line">        <span class="comment">//其映射关系 n-&gt;f(n) 为：0-&gt;1 1-&gt;3 2-&gt;4 3-&gt;2 4-&gt;2</span></span><br><span class="line">        <span class="comment">// 环： 0 -&gt; 1 -&gt; 3 -&gt; 2 -&gt; 4 -&gt; 2 -&gt; 4 ....</span></span><br><span class="line">        <span class="keyword">int</span> slow = <span class="number">0</span>, fast = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">do</span> &#123;</span><br><span class="line">            slow = nums[slow];</span><br><span class="line">            fast = nums[nums[fast]];</span><br><span class="line">        &#125; <span class="keyword">while</span> (slow != fast);</span><br><span class="line">        slow = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (slow != fast) &#123;</span><br><span class="line">            slow = nums[slow];</span><br><span class="line">            fast = nums[fast];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> slow;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatPay.jpg" alt="Julian WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/ALiPay.jpg" alt="Julian Alipay">
+        <p>Alipay</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Julian
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://baoge.work/2024/07/31/%E5%8A%9B%E6%89%A3top100-%E7%89%B9%E6%AE%8A%E6%8A%80%E5%B7%A7/" title="力扣top100-特殊技巧">https://baoge.work/2024/07/31/力扣top100-特殊技巧/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/07/31/%E5%8A%9B%E6%89%A3top100-%E4%BA%8C%E5%88%86/" rel="prev" title="力扣top100-二分">
+      <i class="fa fa-chevron-left"></i> 力扣top100-二分
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-disqus">disqus</a></li>
+            <li class="tab"><a href="#comment-valine">valine</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane disqus" id="comment-disqus">
+              
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+            </div>
+            <div class="tab-pane valine" id="comment-valine">
+              <div class="comments" id="valine-comments"></div>
+            </div>
+        </div>
+      </div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%89%B9%E6%AE%8A%E6%8A%80%E5%B7%A7"><span class="nav-number">1.</span> <span class="nav-text">特殊技巧</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%8D%E8%BF%90%E7%AE%97"><span class="nav-number">2.</span> <span class="nav-text">位运算</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%8D%E7%A7%BB%E6%93%8D%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">位移操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A6%E7%A7%BB%EF%BC%88-lt-lt-%EF%BC%89"><span class="nav-number">3.1.</span> <span class="nav-text">左移（&lt;&lt;）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%B3%E7%A7%BB%EF%BC%88-gt-gt-%EF%BC%89"><span class="nav-number">3.2.</span> <span class="nav-text">右移（&gt;&gt;）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A0%E7%AC%A6%E5%8F%B7%E5%8F%B3%E7%A7%BB%EF%BC%88-gt-gt-gt-%EF%BC%89"><span class="nav-number">3.3.</span> <span class="nav-text">无符号右移（&gt;&gt;&gt;）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%8D%E8%BF%90%E7%AE%97%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">位运算的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E5%A5%87%E5%81%B6%E6%95%B0"><span class="nav-number">4.1.</span> <span class="nav-text">判断奇偶数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%BD%8D%E6%98%AF1%E8%BF%98%E6%98%AF0"><span class="nav-number">4.2.</span> <span class="nav-text">获取二进制位是1还是0</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%A4%E6%8D%A2%E4%B8%A4%E4%B8%AA%E6%95%B4%E6%95%B0%E5%8F%98%E9%87%8F%E7%9A%84%E5%80%BC"><span class="nav-number">4.3.</span> <span class="nav-text">交换两个整数变量的值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E7%94%A8%E5%88%A4%E6%96%AD%E8%AF%AD%E5%8F%A5%EF%BC%8C%E6%B1%82%E6%95%B4%E6%95%B0%E7%9A%84%E7%BB%9D%E5%AF%B9%E5%80%BC"><span class="nav-number">4.4.</span> <span class="nav-text">不用判断语句，求整数的绝对值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98"><span class="nav-number">4.5.</span> <span class="nav-text">常见面试题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#136-%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E6%95%B0%E5%AD%97"><span class="nav-number">5.</span> <span class="nav-text">136. 只出现一次的数字</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#169-%E5%A4%9A%E6%95%B0%E5%85%83%E7%B4%A0"><span class="nav-number">6.</span> <span class="nav-text">169. 多数元素</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#75-%E9%A2%9C%E8%89%B2%E5%88%86%E7%B1%BB"><span class="nav-number">7.</span> <span class="nav-text">75. 颜色分类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#31-%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%8E%92%E5%88%97"><span class="nav-number">8.</span> <span class="nav-text">31. 下一个排列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#287-%E5%AF%BB%E6%89%BE%E9%87%8D%E5%A4%8D%E6%95%B0"><span class="nav-number">9.</span> <span class="nav-text">287. 寻找重复数</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Julian"
+      src="/images/Julian.jpg">
+  <p class="site-author-name" itemprop="name">Julian</p>
+  <div class="site-description" itemprop="description">不论走得快慢，都不能停下来</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/king0421" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;king0421" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1295728062@qq.com" title="E-Mail → mailto:1295728062@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2021.2.7 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Julian</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">46k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">42 mins.</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://Julian.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://baoge.work/2024/07/31/%E5%8A%9B%E6%89%A3top100-%E7%89%B9%E6%AE%8A%E6%8A%80%E5%B7%A7/";
+    this.page.identifier = "2024/07/31/力扣top100-特殊技巧/";
+    this.page.title = "力扣top100-特殊技巧";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://Julian.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'lgUcOKOHS63JrPAhO5Le7SG5-gzGzoHsz',
+      appKey     : 'BQLBMX2tnY5WEUJf9p0wfAIW',
+      placeholder: "快来撩我吧！",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
